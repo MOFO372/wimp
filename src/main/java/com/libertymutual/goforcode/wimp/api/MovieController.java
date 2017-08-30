@@ -55,7 +55,7 @@ public class MovieController {
 	}
 
 	@PostMapping("")
-	public Movie movie(@RequestBody Movie movie, @PathVariable long id) {
+	public Movie movie(@RequestBody Movie movie) {
 		return movieRepo.save(movie);
 	}
 	
