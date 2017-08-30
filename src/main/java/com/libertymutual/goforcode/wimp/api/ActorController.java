@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.libertymutual.goforcode.wimp.models.Actor;
+import com.libertymutual.goforcode.wimp.models.ActorWithMovies;
 import com.libertymutual.goforcode.wimp.repositories.ActorRepository;
 
 @RestController
@@ -35,20 +36,28 @@ public class ActorController {
 		return actorRepo.findAll();
 	}
 	
+	
+	//change this if want to include movie details
 	@GetMapping("{id}") 
 	public Actor getOne(@PathVariable long id) throws NotFoundBitchException {
 		Actor actor = actorRepo.findOne(id); 
 		if(actor == null) {
 			throw new NotFoundBitchException(); 
 		}
-		return actorRepo.findOne(id); 
+		ActorWithMovies newActor = new ActorWithMovies(); 
+		newActor.setActiveSinceYear(actor.getActiveSinceYear()); 
+		newActor.setBirthDate(actor.getBirthDate());
+		newActor.setMovies(actor.getMovies());
+		newActor.setFirstName(actor.getFirstName());
+		newActor.setLastName(actor.getLastName());
+		return newActor; 
 	}
 	
 	@DeleteMapping("{id}") 
 	public Actor deleteOne(@PathVariable long id) {
 		try {
 			Actor actor = actorRepo.findOne(id); 
-			actorRepo.delete(id);; 
+			actorRepo.delete(id);
 			return actor; 
 		} catch (EmptyResultDataAccessException erdae){
 			return null;

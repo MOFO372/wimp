@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.libertymutual.goforcode.wimp.models.Actor;
 import com.libertymutual.goforcode.wimp.models.Movie;
+import com.libertymutual.goforcode.wimp.repositories.ActorRepository;
 import com.libertymutual.goforcode.wimp.repositories.MovieRepository;
 
 @RestController
@@ -21,9 +23,11 @@ import com.libertymutual.goforcode.wimp.repositories.MovieRepository;
 public class MovieController {
 	
 	private MovieRepository movieRepo; 
+	private ActorRepository actorRepo;
 	
-	public MovieController (MovieRepository movieRepo) {
+	public MovieController (MovieRepository movieRepo, ActorRepository actorRepo) {
 		this.movieRepo = movieRepo; 
+		this.actorRepo = actorRepo;
 		
 		movieRepo.save(new Movie("Blades of Glory", new Date(Date.parse("03/30/2007")), 236295729957l, "Dreamworks"));
 		movieRepo.save(new Movie("Anchorman", new Date(Date.parse("07/09/2004")), 4, "Dreamworks"));
@@ -64,6 +68,18 @@ public class MovieController {
 		movie.setId(id);
 		return movieRepo.save(movie); 
 	}
+	
+	@PostMapping("/{movieId}/actors")
+	public Movie associateAnActor(@PathVariable long movieId, @RequestBody Actor actor) {
+		Movie movie = movieRepo.findOne(movieId);
+		actor = actorRepo.findOne(actor.getId());
+		
+		movie.addActor(actor); 
+		movieRepo.save(movie); 
+		
+		return movie;
+	}
+	
 }
 	
 	

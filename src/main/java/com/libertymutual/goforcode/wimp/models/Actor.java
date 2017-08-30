@@ -1,12 +1,16 @@
 package com.libertymutual.goforcode.wimp.models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Actor {
@@ -27,6 +31,10 @@ public class Actor {
 	@Column(nullable=true) 
 	private Date birthDate;
 
+	@JsonIgnore
+	@ManyToMany(mappedBy="actors")
+	private List<Movie> movies;
+	
 	public Actor() {}
 	
 	public Actor(String firstName, String lastName, long activeSinceYear, Date birthDate) {
@@ -74,5 +82,13 @@ public class Actor {
 
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
+	}
+
+	public List<Movie> getMovies() {
+		return movies;
+	}
+
+	public void setMovies(List<Movie> movies) {
+		this.movies = movies;
 	}
 }
