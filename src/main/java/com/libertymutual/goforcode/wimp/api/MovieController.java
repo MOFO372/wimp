@@ -18,8 +18,12 @@ import com.libertymutual.goforcode.wimp.models.Movie;
 import com.libertymutual.goforcode.wimp.repositories.ActorRepository;
 import com.libertymutual.goforcode.wimp.repositories.MovieRepository;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/api/movies")
+@Api(description="Use this to get and create movies and add actors to movies.")
 public class MovieController {
 	
 	private MovieRepository movieRepo; 
@@ -33,11 +37,13 @@ public class MovieController {
 		movieRepo.save(new Movie("Anchorman", new Date(Date.parse("07/09/2004")), 4, "Dreamworks"));
 	}
 	
+	@ApiOperation(value="create a list of movies.")
 	@GetMapping("")
 	public List<Movie> getAll() {
 		return movieRepo.findAll(); 
 	}
 	
+	@ApiOperation(value="get one movie based on movie ID.")
 	@GetMapping("{id}") 
 	public Movie getOne(@PathVariable long id) throws NotFoundBitchException {
 		Movie movie = movieRepo.findOne(id);
@@ -47,6 +53,7 @@ public class MovieController {
 		return movieRepo.findOne(id); 
 	}
 		
+	@ApiOperation(value="delete one movie based on movie ID.")
 	@DeleteMapping("{id}")
 	public Movie deleteOne(@PathVariable long id) {
 		try {
@@ -58,17 +65,21 @@ public class MovieController {
 		}
 	}
 
+	@ApiOperation(value="create a new movie.")
 	@PostMapping("")
 	public Movie movie(@RequestBody Movie movie) {
 		return movieRepo.save(movie);
 	}
 	
+
+	@ApiOperation(value="update one movie based on movie ID.")
 	@PutMapping("{id}")
 	public Movie update(@RequestBody Movie movie, @PathVariable long id) {
 		movie.setId(id);
 		return movieRepo.save(movie); 
 	}
 	
+	@ApiOperation(value="associates actors with movies.")
 	@PostMapping("/{movieId}/actors")
 	public Movie associateAnActor(@PathVariable long movieId, @RequestBody Actor actor) {
 		Movie movie = movieRepo.findOne(movieId);

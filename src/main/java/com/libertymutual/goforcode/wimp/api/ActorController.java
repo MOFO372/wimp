@@ -44,13 +44,14 @@ public class ActorController {
 		if(actor == null) {
 			throw new NotFoundBitchException(); 
 		}
-		ActorWithMovies newActor = new ActorWithMovies(); 
-		newActor.setActiveSinceYear(actor.getActiveSinceYear()); 
-		newActor.setBirthDate(actor.getBirthDate());
-		newActor.setMovies(actor.getMovies());
-		newActor.setFirstName(actor.getFirstName());
-		newActor.setLastName(actor.getLastName());
-		return newActor; 
+//		ActorWithMovies newActor = new ActorWithMovies(); 
+//		newActor.setActiveSinceYear(actor.getActiveSinceYear()); 
+//		newActor.setBirthDate(actor.getBirthDate());
+//		newActor.setMovies(actor.getMovies());
+//		newActor.setFirstName(actor.getFirstName());
+//		newActor.setLastName(actor.getLastName());
+//		return newActor; 
+		return actor;
 	}
 	
 	@DeleteMapping("{id}") 

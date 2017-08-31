@@ -11,8 +11,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 public class Movie {
+	
+	@JsonIdentityInfo(
+			generator=ObjectIdGenerators.PropertyGenerator.class, 
+			property="id")
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
