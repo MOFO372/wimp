@@ -1,6 +1,6 @@
 package com.libertymutual.goforcode.wimp.api;
 
-import java.util.Date;
+//import java.util.Date;
 import java.util.List;
 
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -33,8 +33,8 @@ public class MovieController {
 		this.movieRepo = movieRepo; 
 		this.actorRepo = actorRepo;
 		
-		movieRepo.save(new Movie("Blades of Glory", new Date(Date.parse("03/30/2007")), 236295729957l, "Dreamworks"));
-		movieRepo.save(new Movie("Anchorman", new Date(Date.parse("07/09/2004")), 4, "Dreamworks"));
+//		movieRepo.save(new Movie("Blades of Glory", new Date(Date.parse("03/30/2007")), 236295729957l, "Dreamworks"));
+//		movieRepo.save(new Movie("Anchorman", new Date(Date.parse("07/09/2004")), 4, "Dreamworks"));
 	}
 	
 	@ApiOperation(value="create a list of movies.")
@@ -50,7 +50,7 @@ public class MovieController {
 		if(movie == null) {
 			throw new NotFoundBitchException(); 
 		}
-		return movieRepo.findOne(id); 
+		return movie; 
 	}
 		
 	@ApiOperation(value="delete one movie based on movie ID.")

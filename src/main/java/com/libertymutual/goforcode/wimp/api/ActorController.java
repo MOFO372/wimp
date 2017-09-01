@@ -1,6 +1,6 @@
 package com.libertymutual.goforcode.wimp.api;
 
-import java.sql.Date;
+//import java.sql.Date;
 import java.util.List;
 
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.libertymutual.goforcode.wimp.models.Actor;
-import com.libertymutual.goforcode.wimp.models.ActorWithMovies;
+//import com.libertymutual.goforcode.wimp.models.ActorWithMovies;
 import com.libertymutual.goforcode.wimp.repositories.ActorRepository;
 
 @RestController
@@ -26,9 +26,9 @@ public class ActorController {
 	public ActorController(ActorRepository actorRepo) {
 		this.actorRepo = actorRepo; 
 		
-		actorRepo.save(new Actor("Will", "Ferrel", 1994, new Date(Date.parse("07/16/1967"))));
-		actorRepo.save(new Actor("Jon", "Heder", 2005, new Date(Date.parse("10/26/1977"))));
-		actorRepo.save(new Actor("Paul", "Rudd", 1992, new Date(Date.parse("04/06/1969"))));
+//		actorRepo.save(new Actor("Will", "Ferrel", 1994, new Date(Date.parse("07/16/1967"))));
+//		actorRepo.save(new Actor("Jon", "Heder", 2005, new Date(Date.parse("10/26/1977"))));
+//		actorRepo.save(new Actor("Paul", "Rudd", 1992, new Date(Date.parse("04/06/1969"))));
 	}
 	
 	@GetMapping("") 
